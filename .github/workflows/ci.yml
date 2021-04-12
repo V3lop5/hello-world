@@ -49,9 +49,14 @@ jobs:
             folder:
               - '${{matrix.folder}}/**'  
         
-      - name: Build and run image
+        # This steps makes everything
+        # Builds the image by Dockerfile
+        # Runs the image
+        # Test if console output is "Hello World!"
+      - name: Build, run and test Image
         if: steps.changes.outputs.folder == 'true'
         run: | 
           cd ${{matrix.folder}}
           docker build . --tag $(basename $(pwd))
           docker run $(basename $(pwd))
+          [[ docker logs $(docker ps --all -l --format "{{.ID}}") == "Hello World!" ]] && echo "Output matches 'Hello World!'." || echo "Output does not match 'Hello World!'." && exit 1
