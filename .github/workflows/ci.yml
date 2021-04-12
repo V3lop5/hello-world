@@ -41,14 +41,16 @@ jobs:
       
     steps:
       - uses: actions/checkout@v2
-        
-      - uses: marceloprado/has-changed-path@v1
-        id: changed-folder
+                
+      - uses: dorny/paths-filter@v2
+        id: changes
         with:
-          paths: ${{matrix.folder}}
+          filters: |
+            src:
+              - '${{matrix.folder}}/**'  
         
       - name: Build and run image
-        if: steps.changed-folder.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true'
         run: | 
           cd ${{matrix.folder}}
           docker build . --tag $(basename $(pwd))
