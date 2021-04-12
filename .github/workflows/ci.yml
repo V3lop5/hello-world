@@ -1,0 +1,44 @@
+# This workflow runs all dockerfiles in this repo
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  matrix_prep:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - id: set-matrix
+        name: Prepare matrix from Dockerfiles in repo
+        run: | 
+          matrix=$(find . -type f -name "Dockerfile" -printf "{\"folder\":\"%h\"}," | sed -e 's/,$//')                
+          echo ::set-output name=matrix::{\"include\":[$(echo $matrix)]}
+
+  docker_run:
+    needs: matrix_prep
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Change folder
+        run: cd ${{matrix.folder}}
+      
+      - name: Run Dockerfile
+        run: docker build . --tag $(basename $(pwd))
