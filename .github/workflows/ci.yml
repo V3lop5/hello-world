@@ -19,6 +19,9 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -26,8 +29,8 @@ jobs:
       - id: set-matrix
         name: Prepare matrix from Dockerfiles in repo
         run: | 
-          matrix=$(find . -type f -name "Dockerfile" -printf "{\"folder\":\"%h\"}," | sed -e 's/,$//')              
-          echo $matrix
+          matrix=$(find . -type f -name "Dockerfile" -printf "{\"folder\":\"%h\"}," | sed -e 's/,$//')         
+          echo "Matrix: $matrix"
           echo ::set-output name=matrix::{\"include\":[$(echo $matrix)]}
 
   docker_run:
