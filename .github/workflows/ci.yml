@@ -42,7 +42,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
+    - uses: marceloprado/has-changed-path@v1
+        id: changed-folder
+        with:
+          paths: ${{matrix.folder}}
+        
       - name: Build and run image
+        if: steps.changed-folder.outputs.changed == 'true'
         run: | 
           cd ${{matrix.folder}}
           docker build . --tag $(basename $(pwd))
