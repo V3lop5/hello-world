@@ -26,7 +26,8 @@ jobs:
       - id: set-matrix
         name: Prepare matrix from Dockerfiles in repo
         run: | 
-          matrix=$(find . -type f -name "Dockerfile" -printf "{\"folder\":\"%h\"}," | sed -e 's/,$//')                
+          matrix=$(find . -type f -name "Dockerfile" -printf "{\"folder\":\"%h\"}," | sed -e 's/,$//')              
+          echo $matrix
           echo ::set-output name=matrix::{\"include\":[$(echo $matrix)]}
 
   docker_run:
@@ -34,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
+      
     steps:
       - uses: actions/checkout@v2
       
