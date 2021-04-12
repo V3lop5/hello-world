@@ -45,5 +45,11 @@ jobs:
       - name: Change folder
         run: cd ${{matrix.folder}}
       
+      
+      - name: Check folder
+        run: |
+          pwd
+          ls
+        
       - name: Run Dockerfile
-        run: docker build . --tag $(basename $(pwd))
+        run: docker build -t . --tag $(basename $(pwd))
