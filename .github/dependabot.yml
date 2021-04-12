@@ -13,7 +13,7 @@ updates:
       
     # Gradle for Kotlin   
   - package-ecosystem: "gradle" 
-    directory: "/Kotlin/kotlin-gradle-kts" 
+    directory: "/" 
     schedule:
       interval: "daily"  
       time: "02:00"
