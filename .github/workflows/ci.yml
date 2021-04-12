@@ -45,6 +45,4 @@ jobs:
       - name: Run Dockerfile
         run: | 
           cd ${{matrix.folder}}
-          pwd
-          ls
-          docker build -t . --tag $(basename $(pwd))
+          docker build . --tag $(basename $(pwd))
