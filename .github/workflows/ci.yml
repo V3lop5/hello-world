@@ -42,7 +42,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: Run Dockerfile
+      - name: Build and run image
         run: | 
           cd ${{matrix.folder}}
           docker build . --tag $(basename $(pwd))
+          docker run $(basename $(pwd))
