@@ -41,15 +41,10 @@ jobs:
       
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Change folder
-        run: cd ${{matrix.folder}}
-      
-      
-      - name: Check folder
-        run: |
-          pwd
-          ls
         
       - name: Run Dockerfile
-        run: docker build -t . --tag $(basename $(pwd))
+        run: | 
+          cd ${{matrix.folder}}
+          pwd
+          ls
+          docker build -t . --tag $(basename $(pwd))
