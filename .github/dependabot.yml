@@ -21,3 +21,8 @@ updates:
     directory: "/Kotlin/kotlin-gradle-kts" 
     schedule:
       interval: "daily"  
+
+  - package-ecosystem: "maven" 
+    directory: "/Java/java-maven" 
+    schedule:
+      interval: "daily"  
