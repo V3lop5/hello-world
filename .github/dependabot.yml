@@ -11,9 +11,18 @@ updates:
       interval: "daily"
       time: "02:00"
       
-    # Gradle for Kotlin   
+    # Gradle
   - package-ecosystem: "gradle" 
-    directory: "/" 
+    directory: "/Kotlin/kotlin-gradle" 
+    schedule:
+      interval: "daily" 
+      
+  - package-ecosystem: "gradle" 
+    directory: "/Kotlin/kotlin-gradle-kts" 
     schedule:
       interval: "daily"  
-      time: "02:00"
+
+  - package-ecosystem: "maven" 
+    directory: "/Java/java-maven" 
+    schedule:
+      interval: "daily"  
