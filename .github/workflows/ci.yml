@@ -76,6 +76,5 @@ jobs:
       - id: compare-output
         name: Check if Output matches 'Hello World!'
         if: steps.changes.outputs.folder == 'true'
-        name: Compare Output from executed Image
         run: |
           [[ ${{ steps.retrive-logs.outputs.log }} == "Hello World!" ]] && echo "Output matches 'Hello World!'." || echo "Output does not match 'Hello World!'.\nOutput is: ${{ steps.retrive-logs.outputs.log }}" && exit 1
