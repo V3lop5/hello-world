@@ -48,6 +48,7 @@ jobs:
                 
       - uses: dorny/paths-filter@v2
         id: changes
+        name: Checking for changes in Folder
         with:
           filters: |
             folder:
@@ -73,8 +74,10 @@ jobs:
         if: steps.changes.outputs.folder == 'true'
         run: echo ::set-output name=log::$(docker logs $(docker ps --all -l --format "{{.ID}}"))
         
+        # Checks if output of docker image (executed in step run-image) is 'Hello World!' 
       - id: compare-output
         name: Check if Output matches 'Hello World!'
         if: steps.changes.outputs.folder == 'true'
         run: |
-          [[ ${{ steps.retrive-logs.outputs.log }} == "Hello World!" ]] && echo "Output matches 'Hello World!'." || echo "Output does not match 'Hello World!'.\nOutput is: ${{ steps.retrive-logs.outputs.log }}" && exit 1
+          echo "Output is (see step run-image for full output): ${{ steps.retrive-logs.outputs.log }}"
+          [[ "${{ steps.retrive-logs.outputs.log }}" == "Hello World!" ]] || exit 1
