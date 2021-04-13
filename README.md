@@ -22,4 +22,8 @@ In any case it should contain the release date, what the language is designed fo
 
 
 ## Contributing
-Feel free to contribute. Thats all for now. Just open a PR and add a new language or example project and create or update the `README.md`. You might update Dependabot if its supports your build system.
+Feel free to contribute. Thats all for now. Just open a PR and add a new language and create the `README.md`. 
+
+If you want to add or update a example project feel free to do so! When possible add a Dockerfile to build the program from source and creating a image to execute the program. 
+You might checkout example projects of popular computer languages like [Java](./Java/java-maven) or [Kotlin](./Kotlin/kotlin-gradle-kts) to see how its done.
+You might also update the configuration of Dependabot if its supports your build system.
