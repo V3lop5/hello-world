@@ -10,6 +10,12 @@ Feel free to contribute!
 
 
 ## Structure of Repository
+```
+language/
+|--- HelloWorld-<language>
+|--- README.md
+|--- example-project/
+```
 Every computer language has its own folder named after it. The folder contains a file named `HelloWorld-<language name>` with an example printing `Hello World!` to console.
 The `README.md` file contains information about the language and useful links.
 In any case it should contain the release date, what the language is designed for, supported operating systems, a introduction how to build and run the code and a short guide (or link to a guide) for getting in touch with this language for the first time.
