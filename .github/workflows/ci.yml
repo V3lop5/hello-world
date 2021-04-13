@@ -48,6 +48,7 @@ jobs:
                 
       - uses: dorny/paths-filter@v2
         id: changes
+        name: Checking for changes in Folder
         with:
           filters: |
             folder:
