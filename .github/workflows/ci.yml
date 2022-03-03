@@ -24,7 +24,7 @@ jobs:
       
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3
 
       - id: set-matrix
         name: Prepare matrix from Dockerfiles in Repo
@@ -44,7 +44,7 @@ jobs:
         working-directory: ${{ matrix.folder }}
         
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3
                 
       - uses: dorny/paths-filter@v2
         id: changes
